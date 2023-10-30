@@ -42,6 +42,7 @@ exports.register = async( req,res,next) => {
         if(!user) {
             return next(new Error("Couldn't find any user with that user name"))
         }
+
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET)
 
         res.status(200).json({
@@ -64,7 +65,6 @@ exports.protect = async(req,res,next) => {
     let token;
     if( req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
         token = req.headers.authorization.split(' ')[1];
-
         if (token === "null") {
             token = null;
         }

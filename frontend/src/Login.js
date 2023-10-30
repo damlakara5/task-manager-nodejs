@@ -24,12 +24,14 @@ function Login() {
         })
         const data = await res.json()
         const token = await data.token
-        localStorage.setItem("token", token)
+       
+        token && localStorage.setItem("token", token)
         if(res.ok){
             alert("You are logged in!")
 
         }else{
-            alert("Something went wrong. Please try again!")
+            const m = await data.message
+            alert(m)
 
         }
     }
